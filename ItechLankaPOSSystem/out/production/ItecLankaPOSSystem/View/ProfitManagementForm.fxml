@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="861.0" prefWidth="1586.0" style="-fx-background-color: #FFFFFF; -fx-border-color: #F3F1FB; -fx-border-radius: 5; -fx-background-radius: 10;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ProfitManagementFormController">
+   <children>
+      <ImageView fitHeight="246.0" fitWidth="849.0" layoutX="53.0" layoutY="328.0">
+         <image>
+            <Image url="@../Assets/Screenshot%202022-04-29%20161053.jpg" />
+         </image>
+      </ImageView>
+      <TableView fx:id="tblDirProfits" layoutX="26.0" layoutY="163.0" opacity="0.7" prefHeight="549.0" prefWidth="723.0" stylesheets="@../Assets/StyleSheets/table.css">
+         <columns>
+            <TableColumn fx:id="colDirector" prefWidth="144.00003051757812" text="DIRECTOR ID" />
+            <TableColumn fx:id="colDirName" prefWidth="235.99996948242188" text="DIRECTOR NAME" />
+            <TableColumn fx:id="colProfitMargin" prefWidth="158.0" text="PROFIT MARGIN" />
+            <TableColumn fx:id="colTotalProfit" prefWidth="182.0" text="TOTAL PROFIT" />
+         </columns>
+      </TableView>
+      <ImageView fitHeight="37.0" fitWidth="109.0" layoutX="43.0" layoutY="43.0">
+         <image>
+            <Image url="@../Assets/Screenshot%202022-04-29%20154212.jpg" />
+         </image>
+      </ImageView>
+      <BarChart fx:id="barChart" layoutX="793.0" layoutY="155.0" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="580.0" prefWidth="772.0" stylesheets="@../Assets/StyleSheets/BarChart.css">
+        <xAxis>
+          <CategoryAxis side="BOTTOM" />
+        </xAxis>
+        <yAxis>
+          <NumberAxis side="LEFT" />
+        </yAxis>
+      </BarChart>
+   </children>
+</AnchorPane>

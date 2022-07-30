@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="861.0" prefWidth="1586.0" style="-fx-background-color: #FFFFFF; -fx-border-color: #F3F1FB; -fx-border-radius: 5; -fx-background-radius: 10;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ReportManagementFormController">
+   <children>
+      <ImageView fitHeight="600.0" fitWidth="1093.0" layoutX="458.0" layoutY="239.0" opacity="0.5">
+         <image>
+            <Image url="@../Assets/Screenshot%202022-04-29%20161243.jpg" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="35.0" fitWidth="157.0" layoutX="33.0" layoutY="40.0">
+         <image>
+            <Image url="@../Assets/Screenshot%202022-04-29%20160712.jpg" />
+         </image>
+      </ImageView>
+      <LineChart fx:id="Annualchart" layoutX="23.0" layoutY="506.0" prefHeight="334.0" prefWidth="745.0" stylesheets="@../Assets/StyleSheets/BarChart.css">
+        <xAxis>
+          <CategoryAxis label="Year" side="BOTTOM" />
+        </xAxis>
+        <yAxis>
+          <NumberAxis label="Sales" side="LEFT" />
+        </yAxis>
+      </LineChart>
+      <LineChart fx:id="MonthlyCHart" layoutX="773.0" layoutY="506.0" prefHeight="334.0" prefWidth="745.0" stylesheets="@../Assets/StyleSheets/BarChart.css">
+         <xAxis>
+            <CategoryAxis label="Month" side="BOTTOM" />
+         </xAxis>
+         <yAxis>
+            <NumberAxis label="Sales" side="LEFT" />
+         </yAxis>
+      </LineChart>
+      <LineChart fx:id="DailyCHart" layoutX="20.0" layoutY="115.0" prefHeight="387.0" prefWidth="1503.0" stylesheets="@../Assets/StyleSheets/BarChart.css">
+         <xAxis>
+            <CategoryAxis label="Date" side="BOTTOM" />
+         </xAxis>
+         <yAxis>
+            <NumberAxis label="Sales" side="LEFT" />
+         </yAxis>
+      </LineChart>
+      <JFXComboBox fx:id="cmbYears" focusColor="#405aa800" layoutX="1415.0" layoutY="492.0" prefHeight="28.0" prefWidth="86.0" promptText="Year" unFocusColor="#4d4d4d00" />
+   </children>
+</AnchorPane>
