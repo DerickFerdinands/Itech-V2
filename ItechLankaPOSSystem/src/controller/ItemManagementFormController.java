@@ -49,7 +49,6 @@ public class ItemManagementFormController {
     public JFXTextField txtName;
     public AnchorPane nchrPnImage;
     public JFXTextArea txtrDetails;
-    public ImageView imgSelectedImage;
     public AnchorPane ItemMainPane;
     public TableView<ItemTM> tblItems;
     public TableColumn colCode;
@@ -60,7 +59,6 @@ public class ItemManagementFormController {
     public TableColumn colSellingPrice;
     public TableColumn colOption;
     public JFXTextField txtSearch;
-    private File file;
 
     private final ItemDAO ItemCrudOps = new ItemCRUDController();
 
@@ -72,7 +70,6 @@ public class ItemManagementFormController {
         txtCode.clear();
         txtName.clear();
         cmbCategory.getSelectionModel().clearSelection();
-        setImageProperties(new Image("Assets/image_FILL0_wght400_GRAD0_opsz48.png"), 0.65, 52, 48, 49, 52);
         txtQty.clear();
         txtBuyingPrice.clear();
         txtSellingPrice.clear();
@@ -82,28 +79,9 @@ public class ItemManagementFormController {
         txtName.requestFocus();
         btnAddItem.setText("Add Item");
 
-        resetFields(txtCode, txtName, cmbCategory, imgSelectedImage, txtQty, txtBuyingPrice, txtSellingPrice);
+        resetFields(txtCode, txtName, cmbCategory, txtQty, txtBuyingPrice, txtSellingPrice);
     }
 
-    public void OpenFileSelector(MouseEvent mouseEvent) {
-        FileChooser selectFile = new FileChooser();
-        selectFile.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Images", "*.png", "*.jpeg", "*.jpg"));
-        file = selectFile.showOpenDialog(ItemMainPane.getScene().getWindow());
-        if (file != null) {
-            setImageProperties(new Image("file:" + file.getPath()), 1, 145, 152, 0, 0);
-        } else {
-            setImageProperties(new Image("Assets/image_FILL0_wght400_GRAD0_opsz48.png"), 0.65, 52, 48, 49, 52);
-        }
-    }
-
-    public void setImageProperties(Image img, double opacity, double height, double width, double layoutY, double layoutX) {
-        imgSelectedImage.setImage(img);
-        imgSelectedImage.setOpacity(opacity);
-        imgSelectedImage.setFitHeight(height);
-        imgSelectedImage.setFitWidth(width);
-        imgSelectedImage.setLayoutY(layoutY);
-        imgSelectedImage.setLayoutX(layoutX);
-    }
 
     public void addItemOnAction(ActionEvent actionEvent) {
         addOrUpdateItem();
@@ -111,9 +89,6 @@ public class ItemManagementFormController {
 
     public void initialize() {
         cmbCategory.getItems().addAll("CCTV", "SOLAR PANEL");
-
-
-        RegexMap.put(txtCode, Pattern.compile("^(I00-)[0-9]{1,10}$"));
         RegexMap.put(txtName, Pattern.compile("^[A-z1-9 ,() ]+$"));
         RegexMap.put(txtQty, Pattern.compile("^[0-9]+$"));
         RegexMap.put(txtBuyingPrice, Pattern.compile("^[0-9]+[.0-9]{0,3}?$"));
@@ -143,8 +118,6 @@ public class ItemManagementFormController {
         txtCode.setText(tm.getCode());
         txtName.setText(tm.getName());
         cmbCategory.getSelectionModel().select(tm.getCategory());
-        setImageProperties(new Image("file:" + tm.getImageLocation()), 1, 145, 152, 0, 0);
-        file = new File(tm.getImageLocation());
         txtQty.setText(tm.getQty() + "");
         txtBuyingPrice.setText(tm.getBuyingPrice() + "");
         txtSellingPrice.setText(tm.getSellingPrice() + "");
@@ -163,7 +136,7 @@ public class ItemManagementFormController {
 
             for (Item itemDTO : itemDTOList) {
                 System.out.println(itemDTO);
-                obList.add(new ItemTM(itemDTO.getCode(), itemDTO.getName(), itemDTO.getCategory(), itemDTO.getBuyingPrice(), itemDTO.getSellingPrice(), itemDTO.getQty(), itemDTO.getDetails(), itemDTO.getImageLocation(), getJFXButton(itemDTO.getCode())));
+                obList.add(new ItemTM(itemDTO.getCode(), itemDTO.getName(), itemDTO.getCategory(), itemDTO.getBuyingPrice(), itemDTO.getSellingPrice(), itemDTO.getQty(), itemDTO.getDetails()));
             }
 
             tblItems.setItems(obList);
@@ -172,32 +145,6 @@ public class ItemManagementFormController {
         }
     }
 
-    public JFXButton getJFXButton(String id) {
-        JFXButton btn = new JFXButton("Delete");
-        btn.setStyle("-fx-border-color: #003171");
-        btn.setCursor(Cursor.HAND);
-        btn.setOnAction(event -> {
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are You Sure?", ButtonType.YES, ButtonType.NO);
-            alert.showAndWait();
-            ButtonType buttonType = alert.getResult();
-            if (buttonType.equals(ButtonType.YES)) {
-                try {
-                    if (ItemCrudOps.delete(id)) {
-                        NotificationUtil.playNotification(AnimationType.POPUP, "Client Successfully Deleted!", NotificationType.SUCCESS, Duration.millis(3000));
-                        frequentFunctions();
-                        setAutoId();
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    NotificationUtil.playNotification(AnimationType.POPUP, e.getMessage(), NotificationType.ERROR, Duration.millis(3000));
-                }
-            }
-        });
-        return btn;
-    }
-
-    private void setAutoId() {
-    }
 
     private void frequentFunctions() {
         loadAllItems();
@@ -220,25 +167,21 @@ public class ItemManagementFormController {
     private void addOrUpdateItem() {
 
         try {
-            if (cmbCategory.getSelectionModel().getSelectedItem() == null || file == null) {
+            if (cmbCategory.getSelectionModel().getSelectedItem() == null) {
                 if (cmbCategory.getSelectionModel().getSelectedItem() == null) {
                     cmbCategory.getParent().setStyle("-fx-border-color: red;" + "-fx-border-width:1.5;" + "-fx-border-radius:  5;" + "-fx-background-radius:  5;");
                 } else {
                     cmbCategory.getParent().setStyle("-fx-border-color: green;" + "-fx-border-width:1.5;" + "-fx-border-radius:  5;" + "-fx-background-radius:  5;");
                 }
-                if (file == null) {
-                    imgSelectedImage.getParent().setStyle("-fx-border-color: red;" + "-fx-border-width:1.5;" + "-fx-border-radius:  5;" + "-fx-background-radius:  5;");
-                } else {
-                    imgSelectedImage.getParent().setStyle("-fx-border-color: green;" + "-fx-border-width:1.5;" + "-fx-border-radius:  5;" + "-fx-background-radius:  5;");
-                }
+
             } else {
                 if (btnAddItem.getText().equals("Add Item")) {
-                    if (ItemCrudOps.save(new Item(txtCode.getText(), txtName.getText(), cmbCategory.getValue(), BigDecimal.valueOf(Double.valueOf(txtBuyingPrice.getText())), BigDecimal.valueOf(Double.valueOf(txtSellingPrice.getText())), Integer.valueOf(txtQty.getText()), txtrDetails.getText(), file.getPath()))) {
+                    if (ItemCrudOps.save(new Item(txtCode.getText(), txtName.getText(), cmbCategory.getValue(), BigDecimal.valueOf(Double.valueOf(txtBuyingPrice.getText())), BigDecimal.valueOf(Double.valueOf(txtSellingPrice.getText())), Integer.valueOf(txtQty.getText()), txtrDetails.getText()))) {
                         frequentFunctions();
                         NotificationUtil.playNotification(AnimationType.POPUP, "Item Successfully Added!", NotificationType.SUCCESS, Duration.millis(3000));
                     }
                 } else {
-                    if (ItemCrudOps.update(new Item(txtCode.getText(), txtName.getText(), cmbCategory.getValue(), BigDecimal.valueOf(Double.valueOf(txtBuyingPrice.getText())), BigDecimal.valueOf(Double.valueOf(txtSellingPrice.getText())), Integer.valueOf(txtQty.getText()), txtrDetails.getText(), file.getPath()))) {
+                    if (ItemCrudOps.update(new Item(txtCode.getText(), txtName.getText(), cmbCategory.getValue(), BigDecimal.valueOf(Double.valueOf(txtBuyingPrice.getText())), BigDecimal.valueOf(Double.valueOf(txtSellingPrice.getText())), Integer.valueOf(txtQty.getText()), txtrDetails.getText()))) {
                         frequentFunctions();
                         NotificationUtil.playNotification(AnimationType.POPUP, "Item Updated Added!", NotificationType.SUCCESS, Duration.millis(3000));
                     }
@@ -274,7 +217,7 @@ public class ItemManagementFormController {
                 ObservableList<ItemTM> obList = FXCollections.observableArrayList();
                 for (Item c : list) {
 
-                    obList.add(new ItemTM(c.getCode(), c.getName(), c.getCategory(),c.getSellingPrice(), c.getBuyingPrice(), c.getQty(), c.getDetails(), c.getImageLocation(), getJFXButton(c.getCode())));
+                    obList.add(new ItemTM(c.getCode(), c.getName(), c.getCategory(),c.getSellingPrice(), c.getBuyingPrice(), c.getQty(), c.getDetails()));
                 }
                 tblItems.getItems().clear();
                 tblItems.getItems().addAll(obList);

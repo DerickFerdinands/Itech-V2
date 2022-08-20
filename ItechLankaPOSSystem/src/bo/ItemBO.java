@@ -40,7 +40,7 @@ public class ItemBO {
                 LayoutXValues.add(layoutX);
             }
             System.out.println(layoutX+" "+layoutY);
-            pane.getChildren().add(ItemVIewPane.getItemView(i.getName(), i.getDetails(), i.getSellingPrice() + "", i.getImageLocation(), "Latest", layoutX, layoutY));
+
         }
     }
 }

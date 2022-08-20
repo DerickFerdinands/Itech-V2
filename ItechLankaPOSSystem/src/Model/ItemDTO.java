@@ -91,7 +91,7 @@ public class ItemDTO {
         this.imageLocation = imageLocation;
     }
 
-    public ItemDTO(String code, String name, String category, double buyingPrice, double sellingPrice, double qty, String detail, String imageLocation) {
+    public ItemDTO(String code, String name, String category, double buyingPrice, double sellingPrice, double qty, String detail) {
         this.code = code;
         this.name = name;
         this.category = category;
@@ -99,6 +99,5 @@ public class ItemDTO {
         this.sellingPrice = sellingPrice;
         this.qty = qty;
         this.detail = detail;
-        this.imageLocation = imageLocation;
     }
 }

@@ -7,6 +7,8 @@ import Util.NotificationUtil;
 import View.TM.CartTM;
 import bo.BOFactory;
 import bo.custom.QuotationManagementBO;
+import com.aspose.barcode.generation.BarcodeGenerator;
+import com.aspose.barcode.generation.EncodeTypes;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXRadioButton;
@@ -33,9 +35,15 @@ import net.sf.jasperreports.engine.design.JasperDesign;
 import net.sf.jasperreports.engine.util.JRLoader;
 import net.sf.jasperreports.engine.xml.JRXmlLoader;
 import net.sf.jasperreports.view.JasperViewer;
+import net.sourceforge.barbecue.Barcode;
+import net.sourceforge.barbecue.BarcodeFactory;
+import net.sourceforge.barbecue.BarcodeImageHandler;
 import tray.animations.AnimationType;
 import tray.notification.NotificationType;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.math.BigDecimal;
 import java.sql.Date;
 import java.sql.SQLException;
@@ -110,7 +118,6 @@ public class QuotationManagementFormController {
         try {
             String[] split = code.split(" - ");
             Item item = iDAO.get(split[0]);
-            itemimageview.setImage(new Image("file:" + item.getImageLocation()));
             txtQtyOnHand.setText(item.getQty() + "");
             txtUnitPrice.setText(item.getSellingPrice()+"");
         } catch (Exception e) {
@@ -144,6 +151,15 @@ public class QuotationManagementFormController {
                 OrderDTO o = new OrderDTO(qBO.getOrderId(), cDAO.get(split[1]), LocalDate.now(), calculateTotal(), "Quoted", Double.valueOf(txtAdvance.getText()));
                 if (qBO.addOrder(o, tblCart.getItems())) {
                     NotificationUtil.playNotification(AnimationType.POPUP, "Quotation Placed Successfully!", NotificationType.SUCCESS, Duration.millis(3000));
+  /*                  Barcode barcode = BarcodeFactory.createEAN13("12345678");
+                    BufferedImage image = BarcodeImageHandler.getImage(barcode);
+                    barcode.setFont(BARCODE_TEXT_FONT);
+                    ImageIO.write(image,"png",new File("barcode.png"));*/
+                    BarcodeGenerator generator = new BarcodeGenerator(EncodeTypes.CODE_128, "Aspose.BarCode");
+// set resolution
+                    generator.getParameters().setResolution(400);
+// generate barcode
+                    generator.save("generate-barcode.png");
                     HashMap params = new HashMap();
                     params.put("OrderId", o.getId());
                     params.put("Customer Name",o.getCustomer().getName());

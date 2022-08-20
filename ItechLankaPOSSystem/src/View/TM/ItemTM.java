@@ -12,13 +12,11 @@ public class ItemTM {
     private BigDecimal sellingPrice;
     private int qty;
     private String detail;
-    private String imageLocation;
-    private JFXButton btn;
 
     public ItemTM() {
     }
 
-    public ItemTM(String code, String name, String category, BigDecimal buyingPrice, BigDecimal sellingPrice, int qty, String detail, String imageLocation, JFXButton btn) {
+    public ItemTM(String code, String name, String category, BigDecimal buyingPrice, BigDecimal sellingPrice, int qty, String detail) {
         this.code = code;
         this.name = name;
         this.category = category;
@@ -26,8 +24,6 @@ public class ItemTM {
         this.sellingPrice = sellingPrice;
         this.qty = qty;
         this.detail = detail;
-        this.imageLocation = imageLocation;
-        this.btn = btn;
     }
 
     @Override
@@ -40,8 +36,6 @@ public class ItemTM {
                 ", sellingPrice=" + sellingPrice +
                 ", qty=" + qty +
                 ", detail='" + detail + '\'' +
-                ", imageLocation='" + imageLocation + '\'' +
-                ", btn=" + btn +
                 '}';
     }
 
@@ -101,19 +95,4 @@ public class ItemTM {
         this.detail = detail;
     }
 
-    public String getImageLocation() {
-        return imageLocation;
-    }
-
-    public void setImageLocation(String imageLocation) {
-        this.imageLocation = imageLocation;
-    }
-
-    public JFXButton getBtn() {
-        return btn;
-    }
-
-    public void setBtn(JFXButton btn) {
-        this.btn = btn;
-    }
 }

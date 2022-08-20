@@ -91,6 +91,6 @@ public class PurchaseManagementBOImpl implements PurchaseManagementBO {
     public ItemDTO getItem(String code) throws Exception {
         Item item = iDAO.get(code);
         System.out.println(item);
-        return new ItemDTO(item.getCode(), item.getName(),item.getCategory(),Double.valueOf(item.getBuyingPrice()+""),Double.valueOf(item.getSellingPrice()+""),item.getQty(),item.getDetails(),item.getImageLocation());
+        return new ItemDTO(item.getCode(), item.getName(),item.getCategory(),Double.valueOf(item.getBuyingPrice()+""),Double.valueOf(item.getSellingPrice()+""),item.getQty(),item.getDetails());
     }
 }

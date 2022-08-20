@@ -64,7 +64,7 @@ public class ItemCRUDController implements ItemDAO {
         ArrayList<Item> list = new ArrayList<>();
 
         while (result.next()) {
-            list.add(new Item(result.getString(1), result.getString(2), result.getString(3), result.getBigDecimal(4), result.getBigDecimal(5), result.getInt(6), result.getString(7), result.getString(8)));
+            list.add(new Item(result.getString(1), result.getString(2), result.getString(3), result.getBigDecimal(4), result.getBigDecimal(5), result.getInt(6), result.getString(7)));
         }
         return list;
     }

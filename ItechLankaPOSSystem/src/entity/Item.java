@@ -27,14 +27,13 @@ public class Item {
     private BigDecimal sellingPrice;
     private int qty;
     private String details;
-    private String imageLocation;
     @LazyCollection(LazyCollectionOption.FALSE)
     @OneToMany(mappedBy = "item")
     private List<PurchaseDetail> purchaseDetailList = new ArrayList<>();
     @OneToMany(mappedBy = "item", fetch = FetchType.LAZY)
     private List<OrderDetail> orderDetailList = new ArrayList<>();
 
-    public Item(String code, String name, String category, BigDecimal buyingPrice, BigDecimal sellingPrice, int qty, String details, String imageLocation) {
+    public Item(String code, String name, String category, BigDecimal buyingPrice, BigDecimal sellingPrice, int qty, String details) {
         this.code = code;
         this.name = name;
         this.category = category;
@@ -42,7 +41,6 @@ public class Item {
         this.sellingPrice = sellingPrice;
         this.qty = qty;
         this.details = details;
-        this.imageLocation = imageLocation;
     }
 
     public String getCode() {
@@ -101,13 +99,6 @@ public class Item {
         this.details = details;
     }
 
-    public String getImageLocation() {
-        return imageLocation;
-    }
-
-    public void setImageLocation(String imageLocation) {
-        this.imageLocation = imageLocation;
-    }
 
     public List<PurchaseDetail> getPurchaseDetailList() {
         return purchaseDetailList;

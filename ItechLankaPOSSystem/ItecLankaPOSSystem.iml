@@ -40,5 +40,7 @@
     </orderEntry>
     <orderEntry type="library" name="antlr-2.7.71" level="project" />
     <orderEntry type="library" name="bcprov-jdk15on-1.64" level="project" />
+    <orderEntry type="library" name="net.sourceforge.barbecue:barbecue:1.5-beta1" level="project" />
+    <orderEntry type="library" name="aspose-barcode-22.6-jdk18" level="project" />
   </component>
 </module>
