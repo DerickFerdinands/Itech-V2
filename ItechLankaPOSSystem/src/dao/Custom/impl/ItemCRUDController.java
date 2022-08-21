@@ -7,11 +7,8 @@ import dao.Custom.ItemDAO;
 import entity.Item;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-import org.hibernate.query.NativeQuery;
-import org.hibernate.query.Query;
 
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -56,7 +53,8 @@ public class ItemCRUDController implements ItemDAO {
         transaction.commit();
         session.close();
         session.close();
-        return true;    }
+        return true;
+    }
 
     @Override
     public ArrayList<Item> getMatchingResults(String search) throws Exception {

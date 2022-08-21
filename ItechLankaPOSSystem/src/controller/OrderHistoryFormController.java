@@ -31,6 +31,7 @@ import java.util.HashMap;
 import java.util.stream.Collectors;
 
 public class OrderHistoryFormController {
+    private final OrderHistoryBO ohBO = (OrderHistoryBO) BOFactory.getInstance().getBO(BOFactory.BOTypes.ORDER_HISTORY);
     public TableView<OrderHistoryTM> tblOrders;
     public TableColumn colQuotationID;
     public TableColumn colCustomerName;
@@ -48,8 +49,6 @@ public class OrderHistoryFormController {
     public JFXButton btnUpdatePayment;
     public JFXButton btnCancel;
     public Label lblOrderID;
-
-    private final OrderHistoryBO ohBO = (OrderHistoryBO) BOFactory.getInstance().getBO(BOFactory.BOTypes.ORDER_HISTORY);
 
     public void searchMatchingOrders(ActionEvent actionEvent) {
     }
@@ -112,19 +111,19 @@ public class OrderHistoryFormController {
                     JasperReport compileReport = (JasperReport) JRLoader.loadObject(this.getClass().getResource("/reports/Reciept.jasper"));
                     JasperPrint jasperPrint = JasperFillManager.fillReport(compileReport, params, DBConnection.getInstance().getConnection());
                     JasperViewer.viewReport(jasperPrint, false);
-                }else{
+                } else {
                     HashMap params = new HashMap();
                     params.put("OrderId", o.getId());
-                    params.put("Customer Name",o.getCustomer().getName());
-                    params.put("Contact",o.getCustomer().getMobile());
+                    params.put("name", o.getCustomer().getName());
+                    params.put("telNumber", o.getCustomer().getMobile());
                     params.put("Date", Date.valueOf(o.getDate()));
-                    params.put("Total",o.getTotal()+"");
-                    params.put("Advance",o.getPayedAmount()+"");
-                    params.put("Balance",o.getTotal()-o.getPayedAmount()+"");
+                    params.put("Total", o.getTotal());
+               /*     params.put("Advance",o.getPayedAmount()+"");
+                    params.put("Balance",o.getTotal()-o.getPayedAmount()+"");*/
 
-                    JasperReport compileReport = (JasperReport) JRLoader.loadObject(this.getClass().getResource("/reports/Quotation.jasper"));
+                    JasperReport compileReport = (JasperReport) JRLoader.loadObject(this.getClass().getResource("/reports/OrderQuotation.jasper"));
                     JasperPrint jasperPrint = JasperFillManager.fillReport(compileReport, params, DBConnection.getInstance().getConnection());
-                    JasperViewer.viewReport(jasperPrint,false);
+                    JasperViewer.viewReport(jasperPrint, false);
                 }
             } catch (Exception e) {
                 e.printStackTrace();

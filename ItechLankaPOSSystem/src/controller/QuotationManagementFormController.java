@@ -1,14 +1,10 @@
 package controller;
 
-import Model.CustomerDTO;
-import Model.ItemDTO;
 import Model.OrderDTO;
 import Util.NotificationUtil;
 import View.TM.CartTM;
 import bo.BOFactory;
 import bo.custom.QuotationManagementBO;
-import com.aspose.barcode.generation.BarcodeGenerator;
-import com.aspose.barcode.generation.EncodeTypes;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXRadioButton;
@@ -31,31 +27,21 @@ import javafx.util.Duration;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
-import net.sf.jasperreports.engine.design.JasperDesign;
 import net.sf.jasperreports.engine.util.JRLoader;
-import net.sf.jasperreports.engine.xml.JRXmlLoader;
 import net.sf.jasperreports.view.JasperViewer;
-import net.sourceforge.barbecue.Barcode;
-import net.sourceforge.barbecue.BarcodeFactory;
-import net.sourceforge.barbecue.BarcodeImageHandler;
 import tray.animations.AnimationType;
 import tray.notification.NotificationType;
 
-import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
-import java.io.File;
 import java.math.BigDecimal;
 import java.sql.Date;
-import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.stream.Collectors;
 
-import static dao.Custom.ItemVIewPane.getButton;
-
 public class QuotationManagementFormController {
     private final CustomerDAO cDAO = new CustomerCRUDController();
     private final ItemDAO iDAO = new ItemCRUDController();
+    private final QuotationManagementBO qBO = (QuotationManagementBO) BOFactory.getInstance().getBO(BOFactory.BOTypes.QUOTATION);
     public JFXTextField txtQuotationID;
     public JFXComboBox<String> cmbCustomerName;
     public JFXTextField txtAddress;
@@ -82,8 +68,6 @@ public class QuotationManagementFormController {
     public Label lblTotal;
     public JFXRadioButton rdbxBuyNow;
     public JFXRadioButton rdbxQuotation;
-
-    private final QuotationManagementBO qBO = (QuotationManagementBO) BOFactory.getInstance().getBO(BOFactory.BOTypes.QUOTATION);
     public JFXTextField txtUnitPrice;
 
     public void initialize() {
@@ -119,7 +103,7 @@ public class QuotationManagementFormController {
             String[] split = code.split(" - ");
             Item item = iDAO.get(split[0]);
             txtQtyOnHand.setText(item.getQty() + "");
-            txtUnitPrice.setText(item.getSellingPrice()+"");
+            txtUnitPrice.setText(item.getSellingPrice() + "");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -151,27 +135,18 @@ public class QuotationManagementFormController {
                 OrderDTO o = new OrderDTO(qBO.getOrderId(), cDAO.get(split[1]), LocalDate.now(), calculateTotal(), "Quoted", Double.valueOf(txtAdvance.getText()));
                 if (qBO.addOrder(o, tblCart.getItems())) {
                     NotificationUtil.playNotification(AnimationType.POPUP, "Quotation Placed Successfully!", NotificationType.SUCCESS, Duration.millis(3000));
-  /*                  Barcode barcode = BarcodeFactory.createEAN13("12345678");
-                    BufferedImage image = BarcodeImageHandler.getImage(barcode);
-                    barcode.setFont(BARCODE_TEXT_FONT);
-                    ImageIO.write(image,"png",new File("barcode.png"));*/
-                    BarcodeGenerator generator = new BarcodeGenerator(EncodeTypes.CODE_128, "Aspose.BarCode");
-// set resolution
-                    generator.getParameters().setResolution(400);
-// generate barcode
-                    generator.save("generate-barcode.png");
                     HashMap params = new HashMap();
                     params.put("OrderId", o.getId());
-                    params.put("Customer Name",o.getCustomer().getName());
-                    params.put("Contact",o.getCustomer().getMobile());
+                    params.put("name", o.getCustomer().getName());
+                    params.put("telNumber", o.getCustomer().getMobile());
                     params.put("Date", Date.valueOf(o.getDate()));
-                    params.put("Total",o.getTotal()+"");
-                    params.put("Advance",o.getPayedAmount()+"");
-                    params.put("Balance",o.getTotal()-o.getPayedAmount()+"");
+                    params.put("Total", o.getTotal());
+             /*       params.put("Advance", o.getPayedAmount() + "");
+                    params.put("Balance", o.getTotal() - o.getPayedAmount() + "");*/
 
-                    JasperReport compileReport = (JasperReport) JRLoader.loadObject(this.getClass().getResource("/reports/Quotation.jasper"));
+                    JasperReport compileReport = (JasperReport) JRLoader.loadObject(this.getClass().getResource("/reports/OrderQuotation.jasper"));
                     JasperPrint jasperPrint = JasperFillManager.fillReport(compileReport, params, DBConnection.getInstance().getConnection());
-                    JasperViewer.viewReport(jasperPrint,false);
+                    JasperViewer.viewReport(jasperPrint, false);
                     btnCancel.fire();
                 } else {
                     new Alert(Alert.AlertType.ERROR, "Something Went Wrong!", ButtonType.OK).show();
@@ -218,7 +193,7 @@ public class QuotationManagementFormController {
 
     private JFXButton getButton(String itemCode) {
         JFXButton btn = new JFXButton("Delete");
-        btn.setStyle("-fx-background-color: Black;"+"-fx-text-fill: White");
+        btn.setStyle("-fx-background-color: Black;" + "-fx-text-fill: White");
         btn.setOnAction(event -> {
             tblCart.getItems().remove(tblCart.getItems().stream().filter(o -> {
                 return o.getItemCode().equals(itemCode);
@@ -261,14 +236,14 @@ public class QuotationManagementFormController {
                     NotificationUtil.playNotification(AnimationType.POPUP, "Order Placed Successfully!", NotificationType.SUCCESS, Duration.millis(3000));
                     HashMap params = new HashMap();
                     params.put("OrderId", o.getId());
-                    params.put("Customer Name",o.getCustomer().getName());
-                    params.put("Contact",o.getCustomer().getMobile());
+                    params.put("Customer Name", o.getCustomer().getName());
+                    params.put("Contact", o.getCustomer().getMobile());
                     params.put("Date", Date.valueOf(o.getDate()));
-                    params.put("Total",o.getTotal()+"");
+                    params.put("Total", o.getTotal() + "");
 
                     JasperReport compileReport = (JasperReport) JRLoader.loadObject(this.getClass().getResource("/reports/Reciept.jasper"));
                     JasperPrint jasperPrint = JasperFillManager.fillReport(compileReport, params, DBConnection.getInstance().getConnection());
-                    JasperViewer.viewReport(jasperPrint,false);
+                    JasperViewer.viewReport(jasperPrint, false);
                     btnCancel.fire();
                 } else {
                     new Alert(Alert.AlertType.ERROR, "Something Went Wrong!", ButtonType.OK).show();
@@ -281,7 +256,7 @@ public class QuotationManagementFormController {
     }
 
     private double calculateTotal() {
-        double total = tblCart.getItems().stream().mapToDouble(cartTM -> Double.valueOf(cartTM.getTotal() + "") ).sum();
+        double total = tblCart.getItems().stream().mapToDouble(cartTM -> Double.valueOf(cartTM.getTotal() + "")).sum();
         lblTotal.setText(total + "");
         txtTotal.setText(total + "");
         if (rdbxQuotation.isSelected()) {
@@ -293,8 +268,8 @@ public class QuotationManagementFormController {
                     txtAdvance.clear();
                     new Alert(Alert.AlertType.WARNING, e.getMessage(), ButtonType.OK).show();
                 }
-            }else if((txtAdvance.getText().isEmpty()) && (!tblCart.getItems().isEmpty())){
-                txtBalance.setText(total+"");
+            } else if ((txtAdvance.getText().isEmpty()) && (!tblCart.getItems().isEmpty())) {
+                txtBalance.setText(total + "");
             }
         }
         return total;

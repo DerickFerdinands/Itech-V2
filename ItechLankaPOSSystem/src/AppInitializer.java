@@ -1,4 +1,5 @@
 import Util.FactoryConfigurations;
+import db.DBConnection;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -7,6 +8,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 public class AppInitializer extends Application {
 
@@ -21,5 +23,8 @@ public class AppInitializer extends Application {
         primaryStage.getIcons().add(new Image("Assets/11606da5a97ab6aa78fc81dd4a12b394.jpg"));
         primaryStage.setTitle("Itech Lanka Pvt Ltd POS System");
         primaryStage.show();
+        primaryStage.setOnCloseRequest(e->{
+          System.exit(0);
+        });
     }
 }
