@@ -12,4 +12,7 @@ public interface OrderHistoryBO extends SuperBO {
     boolean updateOrder(OrderDTO order) throws Exception;
 
     OrderDTO getOrder(String OrderId) throws Exception;
+
+    ArrayList<OrderDTO> getMatchingResults(String search) throws Exception;
+
 }

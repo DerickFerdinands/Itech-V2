@@ -51,6 +51,19 @@ public class OrderHistoryFormController {
     public Label lblOrderID;
 
     public void searchMatchingOrders(ActionEvent actionEvent) {
+        String text = txtSearch.getText();
+
+        try {
+            tblOrders.getItems().clear();
+            tblOrders.getItems().addAll(ohBO.getMatchingResults(text).stream().map(orderDTO -> {
+                Customer c = orderDTO.getCustomer();
+                return new OrderHistoryTM(orderDTO.getId(), c.getName(), c.getAddress(), BigDecimal.valueOf(orderDTO.getTotal()), BigDecimal.valueOf(orderDTO.getPayedAmount()), BigDecimal.valueOf(orderDTO.getTotal() - orderDTO.getPayedAmount()), orderDTO.getPaymentStatus(), getUpdateButton(orderDTO.getPaymentStatus(), orderDTO.getId()), getBillButton(orderDTO.getPaymentStatus(), orderDTO.getId()));
+            }).collect(Collectors.toList()));
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            new Alert(Alert.AlertType.WARNING, e.getMessage(), ButtonType.OK).show();
+        }
     }
 
     public void initialize() {

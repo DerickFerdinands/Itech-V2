@@ -70,7 +70,12 @@ public class OrderDAOImpl implements OrderDAO {
 
     @Override
     public ArrayList<Orders> getMatchingResults(String search) throws Exception {
-        return null;
+        Session session = FactoryConfigurations.getInstance().getSession();
+        Transaction transaction = session.beginTransaction();
+        List<Orders> list = session.createQuery(" FROM Orders WHERE Id LIKE: ID").setParameter("ID","%"+search+"%").list();
+        transaction.commit();
+        session.close();
+        return new ArrayList<Orders>(list);
     }
 
     @Override

@@ -32,4 +32,12 @@ public class OrderHistoryBOImpl implements OrderHistoryBO {
         Orders order = oDAO.get(OrderId);
         return new OrderDTO(order.getId(),order.getCustomer(),order.getDate(),order.getTotal(),order.getPaymentStatus(),order.getPayedAmount());
     }
+
+    @Override
+    public ArrayList<OrderDTO> getMatchingResults(String search) throws Exception {
+        ArrayList<Orders> matchingResults = oDAO.getMatchingResults(search);
+       return new ArrayList<OrderDTO>( matchingResults.stream().map(orders->{
+            return new OrderDTO(orders.getId(),orders.getCustomer(),orders.getDate(),orders.getTotal(),orders.getPaymentStatus(),orders.getPayedAmount());
+        }).collect(Collectors.toList()));
+    }
 }
