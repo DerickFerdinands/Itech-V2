@@ -11,8 +11,6 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.paint.LinearGradient?>
-<?import javafx.scene.paint.Stop?>
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
@@ -234,7 +232,12 @@
                   <Image url="@../Assets/output-onlinepngtools.png" />
                </image>
             </ImageView>
-            <AnchorPane layoutX="46.0" layoutY="160.0" prefHeight="310.0" prefWidth="549.0" style="-fx-background-color: #ECFBFD; -fx-background-radius: 10;">
+            <ImageView fitHeight="850.0" fitWidth="1104.0" layoutX="478.0" layoutY="5.0">
+               <image>
+                  <Image url="@../Assets/original-3f3e81d15d0f2009e1d4708ab241b8d6.jpg" />
+               </image>
+            </ImageView>
+            <AnchorPane layoutX="46.0" layoutY="420.0" prefHeight="310.0" prefWidth="549.0" style="-fx-background-color: #ECFBFD; -fx-background-radius: 10;">
                <children>
                   <ImageView layoutX="53.0" layoutY="70.0">
                      <image>
@@ -253,12 +256,12 @@
                   </Label>
                </children>
             </AnchorPane>
-            <ImageView layoutX="64.0" layoutY="118.0">
+            <ImageView layoutX="58.0" layoutY="359.0">
                <image>
                   <Image url="@../Assets/output-onlinepngtools%20(1).png" />
                </image>
             </ImageView>
-            <BarChart fx:id="barChartPerformance" horizontalGridLinesVisible="false" layoutX="682.0" layoutY="155.0" prefHeight="363.0" prefWidth="859.0" stylesheets="@../Assets/StyleSheets/BarChart.css">
+            <BarChart fx:id="barChartPerformance" horizontalGridLinesVisible="false" layoutX="682.0" layoutY="397.0" prefHeight="363.0" prefWidth="859.0" stylesheets="@../Assets/StyleSheets/BarChart.css">
                <xAxis>
                   <CategoryAxis side="BOTTOM" />
                </xAxis>
@@ -266,127 +269,42 @@
                   <NumberAxis side="LEFT" />
                </yAxis>
             </BarChart>
-            <Label layoutX="86.0" layoutY="504.0" text="Units Sold" textFill="#848c94" />
-            <ImageView fitHeight="41.0" fitWidth="38.0" layoutX="45.0" layoutY="521.0">
+            <Label layoutX="118.0" layoutY="188.0" text="Units Sold" textFill="#848c94" />
+            <ImageView fitHeight="41.0" fitWidth="38.0" layoutX="77.0" layoutY="205.0">
                <image>
                   <Image url="@../Assets/image%20(37).png" />
                </image>
             </ImageView>
-            <Label fx:id="lblUnits" layoutX="87.0" layoutY="524.0" style="-fx-font-size: 25; -fx-font-family: System; -fx-font-style: Bold;" text="100 Units">
+            <Label fx:id="lblUnits" layoutX="119.0" layoutY="208.0" style="-fx-font-size: 25; -fx-font-family: System; -fx-font-style: Bold;" text="100 Units">
                <font>
                   <Font size="1.0" />
                </font>
             </Label>
-            <Line endX="-100.0" endY="56.0" layoutX="321.0" layoutY="503.0" startX="-100.0" />
-            <Label layoutX="290.0" layoutY="504.0" text="Directors" textFill="#848c94" />
-            <ImageView fitHeight="41.0" fitWidth="46.0" layoutX="239.0" layoutY="521.0">
+            <Line endX="-100.0" endY="56.0" layoutX="353.0" layoutY="185.0" startX="-100.0" />
+            <Label layoutX="322.0" layoutY="188.0" text="Directors" textFill="#848c94" />
+            <ImageView fitHeight="41.0" fitWidth="46.0" layoutX="271.0" layoutY="205.0">
                <image>
                   <Image url="@../Assets/image%20(38).png" />
                </image>
             </ImageView>
-            <Label fx:id="lblDirectors" layoutX="307.0" layoutY="524.0" style="-fx-font-size: 25; -fx-font-family: System; -fx-font-style: Bold;" text="04">
+            <Label fx:id="lblDirectors" layoutX="339.0" layoutY="208.0" style="-fx-font-size: 25; -fx-font-family: System; -fx-font-style: Bold;" text="04">
                <font>
                   <Font size="1.0" />
                </font>
             </Label>
-            <Line endX="-100.0" endY="56.0" layoutX="491.0" layoutY="503.0" startX="-100.0" />
-            <Label layoutX="460.0" layoutY="504.0" text="Customers" textFill="#848c94" />
-            <ImageView fitHeight="41.0" fitWidth="38.0" layoutX="415.0" layoutY="518.0">
+            <Line endX="-100.0" endY="56.0" layoutX="523.0" layoutY="185.0" startX="-100.0" />
+            <Label layoutX="492.0" layoutY="188.0" text="Customers" textFill="#848c94" />
+            <ImageView fitHeight="41.0" fitWidth="38.0" layoutX="447.0" layoutY="202.0">
                <image>
                   <Image url="@../Assets/image%20(39).png" />
                </image>
             </ImageView>
-            <Label fx:id="lblCustomers" layoutX="478.0" layoutY="524.0" style="-fx-font-size: 25; -fx-font-family: System; -fx-font-style: Bold;" text="70">
+            <Label fx:id="lblCustomers" layoutX="510.0" layoutY="208.0" style="-fx-font-size: 25; -fx-font-family: System; -fx-font-style: Bold;" text="70">
                <font>
                   <Font size="1.0" />
                </font>
             </Label>
-            <AnchorPane fx:id="ReviewsPane" layoutX="50.0" layoutY="585.0" onMouseEntered="#ShowPaneUI" onMouseExited="#HidePaneUI" prefHeight="213.0" prefWidth="355.0" style="-fx-background-color: #ECFBFD; -fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: #F4F5F8;">
-               <children>
-                  <ImageView id="imgS" fx:id="imgPules1" fitHeight="213.0" fitWidth="353.0">
-                     <image>
-                        <Image url="@../Assets/Screenshot%202022-04-27%20162559.jpg" />
-                     </image>
-                  </ImageView>
-                  <Label id="lbl1" fx:id="lblDash1" layoutX="64.0" layoutY="91.0" onMouseEntered="#lblMouseEnteredOnAction" onMouseExited="#lblMouseExitedOnAction" style="-fx-font-size: 25; -fx-font-family: System; -fx-font-style: Bold Italic;" text="CUSTOMER REVIEWS" textFill="WHITE">
-                     <font>
-                        <Font size="1.0" />
-                     </font>
-                  </Label>
-               </children>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </AnchorPane>
-            <AnchorPane fx:id="ProductsPane" layoutX="429.0" layoutY="585.0" onMouseClicked="#GoToAllProductsOnAction" onMouseEntered="#ShowPaneUI" onMouseExited="#HidePaneUI" prefHeight="213.0" prefWidth="353.0" style="-fx-background-color: #ECFBFD; -fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: #F4F5F8;">
-               <children>
-                  <ImageView id="imgS1" fx:id="imgPules2" fitHeight="213.0" fitWidth="353.0" layoutY="-2.0" onMouseEntered="#imagesPulseOnAction">
-                     <image>
-                        <Image url="@../Assets/Screenshot%202022-04-27%20170141.jpg" />
-                     </image>
-                  </ImageView>
-                  <Label id="lbl2" fx:id="lblDash2" layoutX="81.0" layoutY="91.0" onMouseEntered="#lblMouseEnteredOnAction" onMouseExited="#lblMouseExitedOnAction" style="-fx-font-size: 25; -fx-font-family: System; -fx-font-style: Bold Italic;" text="All Our Products" textFill="WHITE">
-                     <font>
-                        <Font size="1.0" />
-                     </font>
-                  </Label>
-               </children>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </AnchorPane>
-            <AnchorPane fx:id="CategoriesPane" layoutX="810.0" layoutY="585.0" onMouseEntered="#ShowPaneUI" onMouseExited="#HidePaneUI" prefHeight="213.0" prefWidth="355.0" style="-fx-background-color: #ECFBFD; -fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: #F4F5F8;">
-               <children>
-                  <ImageView id="imgS2" fx:id="imgPules3" fitHeight="213.0" fitWidth="353.0" onMouseEntered="#imagesPulseOnAction">
-                     <image>
-                        <Image url="@../Assets/Screenshot%202022-04-27%20170400.jpg" />
-                     </image>
-                  </ImageView>
-                  <Label id="lbl3" fx:id="lblDash3" layoutX="116.0" layoutY="91.0" onMouseEntered="#lblMouseEnteredOnAction" onMouseExited="#lblMouseExitedOnAction" style="-fx-font-size: 25; -fx-font-family: System; -fx-font-style: Bold Italic;" text="Categories">
-                     <font>
-                        <Font size="1.0" />
-                     </font>
-                     <textFill>
-                        <LinearGradient endX="1.0" endY="1.0">
-                           <stops>
-                              <Stop color="#48595e" />
-                              <Stop color="#48595e" offset="0.007246376811594203" />
-                              <Stop color="#6e88a4" offset="1.0" />
-                           </stops>
-                        </LinearGradient>
-                     </textFill>
-                  </Label>
-               </children>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </AnchorPane>
-            <AnchorPane fx:id="ExtrasPane" layoutX="1191.0" layoutY="585.0" onMouseEntered="#ShowPaneUI" onMouseExited="#HidePaneUI" prefHeight="213.0" prefWidth="346.0" style="-fx-background-color: #ECFBFD; -fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: #F4F5F8;">
-               <children>
-                  <ImageView id="imgS3" fx:id="imgPules4" fitHeight="213.0" fitWidth="353.0" layoutY="-3.0" onMouseEntered="#imagesPulseOnAction">
-                     <image>
-                        <Image url="@../Assets/Screenshot%202022-04-27%20170549.jpg" />
-                     </image>
-                  </ImageView>
-                  <Label id="lbl4" fx:id="lblDash4" layoutX="144.0" layoutY="91.0" onMouseEntered="#lblMouseEnteredOnAction" onMouseExited="#lblMouseExitedOnAction" style="-fx-font-size: 25; -fx-font-family: System; -fx-font-style: Bold Italic;" text="Extras">
-                     <font>
-                        <Font size="1.0" />
-                     </font>
-                     <textFill>
-                        <LinearGradient endX="0.854368932038835" endY="0.16990291262135926" startY="0.32038834951456313">
-                           <stops>
-                              <Stop color="WHITE" />
-                              <Stop color="#b9b9b9" offset="1.0" />
-                           </stops>
-                        </LinearGradient>
-                     </textFill>
-                  </Label>
-               </children>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </AnchorPane>
-            <ImageView layoutX="729.0" layoutY="120.0">
+            <ImageView layoutX="729.0" layoutY="362.0">
                <image>
                   <Image url="@../Assets/output-onlinepngtools%20(4).png" />
                </image>

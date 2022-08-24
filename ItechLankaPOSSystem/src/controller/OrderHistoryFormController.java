@@ -116,12 +116,12 @@ public class OrderHistoryFormController {
                 if (status.equals("Payed")) {
                     HashMap params = new HashMap();
                     params.put("OrderId", o.getId());
-                    params.put("Customer Name", o.getCustomer().getName());
-                    params.put("Contact", o.getCustomer().getMobile());
+                    params.put("name", o.getCustomer().getName());
+                    params.put("telNumber", o.getCustomer().getMobile());
                     params.put("Date", Date.valueOf(o.getDate()));
-                    params.put("Total", o.getTotal() + "");
+                    params.put("Total", o.getTotal());
 
-                    JasperReport compileReport = (JasperReport) JRLoader.loadObject(this.getClass().getResource("/reports/Reciept.jasper"));
+                    JasperReport compileReport = (JasperReport) JRLoader.loadObject(this.getClass().getResource("/reports/OrderReciept.jasper"));
                     JasperPrint jasperPrint = JasperFillManager.fillReport(compileReport, params, DBConnection.getInstance().getConnection());
                     JasperViewer.viewReport(jasperPrint, false);
                 } else {

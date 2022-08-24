@@ -81,13 +81,12 @@
       </Label>
       <TableView fx:id="tblItems" layoutX="474.0" layoutY="151.0" opacity="0.7" prefHeight="672.0" prefWidth="1067.0" stylesheets="@../Assets/StyleSheets/table.css">
          <columns>
-            <TableColumn fx:id="colCode" prefWidth="132.0" text="ITEM CODE" />
-            <TableColumn fx:id="colName" prefWidth="197.0" text="ITEM NAME" />
-            <TableColumn fx:id="colCategory" prefWidth="156.0" text="CATEGORY" />
-            <TableColumn fx:id="colQty" prefWidth="139.0" text="QTY" />
-            <TableColumn fx:id="colBuyingPrice" prefWidth="164.0" text="BUYING PRICE" />
-            <TableColumn fx:id="colSellingPrice" prefWidth="152.0" text="SELLING PRICE" />
-            <TableColumn fx:id="colOption" prefWidth="128.0" text="---" />
+            <TableColumn fx:id="colCode" prefWidth="152.0" text="ITEM CODE" />
+            <TableColumn fx:id="colName" prefWidth="233.0" text="ITEM NAME" />
+            <TableColumn fx:id="colCategory" prefWidth="165.0" text="CATEGORY" />
+            <TableColumn fx:id="colQty" prefWidth="153.0" text="QTY" />
+            <TableColumn fx:id="colBuyingPrice" prefWidth="186.0" text="BUYING PRICE" />
+            <TableColumn fx:id="colSellingPrice" prefWidth="177.0" text="SELLING PRICE" />
          </columns>
       </TableView>
       <AnchorPane layoutX="474.0" layoutY="76.0" prefHeight="52.0" prefWidth="1067.0" style="-fx-border-color: #58D5E6; -fx-border-width: 1.5; -fx-border-radius: 5; -fx-background-radius: 5;">
